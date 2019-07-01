@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Marvel Comics Finder</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Are you a fan of the Marvel movies but intimidated by the comics? This project is designed for users to search for their favorite characters and find right where to start.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+
+    <body>
+        <nav>
+            <a href="#resource-link" id="top-link">Helpful Links</a>
+        </nav>
+
+        <header>
+            <h1>Are you interested in comics?</h1>
+            <p>So you've seen the movies and want the stories to continue. Marvel has nearly 80 years of comics to explore and endless stories to enjoy! But getting into comics can be intimidating. This resource helps new and old readers to start on their journey.</p>
+            <form action="#" class="marvel-search" id="js-form">
+                <label for="character-search">Search your favorite Marvel character below!</label>
+                <input type="text" name="character-search" id="js-character-search" placeholder="ex: Black Panther">
+                <input type="submit" value="Search!">
+            </form>
+        </header>
+
+        <main>
+            <section class="result-blocks origin">
+                <h2>Origin Story</h2>
+                <p>Learn about how your favorite character came about:</p>
+                <div>
+                    <img src="#" alt="character image">
+                    <h3>Character Name</h3>
+                    <p>Text from Comic Vine for origin story</p>
+                    <a href="#">Link back to comicvine.com for more info</a>
+                </div>
+            </section>
+
+            <section class="result-blocks videos">
+                <h2>Videos</h2>
+                <p>Watch a quick history on your character from super-fans:</p>
+                <div>
+                    <p>Video Title</p>
+                    <video src="#">Video from YouTube</video>
+                </div>
+            </section>
+
+            <section class="result-blocks comics">
+                <h2>Comics</h2>
+                <p>Get started reading! Here are a few places to start:</p>
+                <div>
+                    <p>Comic Title</p>
+                    <a href="#"><img src="#" alt="comic book cover"></a>
+                </div>
+            </section>
+
+            <section class="result-blocks forum">
+                <h2>Join the Discussion!</h2>
+                <p>Have a question or comment? Reddit is a great place to join a community of like-minded individuals:</p>
+                <div>
+                    <h3>Title to forum post</h3>
+                </div>
+            </section>
+
+            <section class="result-blocks resources" id="resource-link">
+                <h2>Helpful Links</h2>
+                <p>There are lots of great resources around the web to learn more about comics and to get in on the discussion.</p>
+                <ul>
+                    <li><a href="https://www.marvel.com/comics/unlimited/home">Marvel Unlimited</a>: The Netflix of Marvel comics. Get access to their entire backlog</li>
+                    <li><a href="https://www.comicbookherald.com/">Comic Book Herald</a>: Great resource for reading lists of events and characters</li>
+                    <li><a href="https://www.reddit.com/r/Marvel/">r/marvel</a>: A subreddit for everything Marvel!</li>
+                    <li><a href="https://www.reddit.com/r/comicbooks/">r/comicbooks</a>: Another subreddit for the wider world of comics!</li>
+                    <li><a href="https://www.youtube.com/channel/UC4kjDjhexSVuC8JWk4ZanFw">Variant YouTube Channel</a>: Great channel for quick histories on your favorite characters</li>
+                    <li><a href="https://www.marvel.com/">Marvel.com</a>When in doubt, go to the source!</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <a href="#top-link">Want to search again?</a>
+            <p>Data provided by Marvel. © 2014 Marvel</p>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+</html>
