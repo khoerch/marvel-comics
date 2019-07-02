@@ -15,7 +15,7 @@ function displayVideos(videoJson) {
     console.log(videoJson);
     $('#video-results').empty();
     for (let i = 0; i < videoJson.items.length; i++) {
-        $('#video-results').html(`
+        $('#video-results').append(`
         <li>
             <p>${videoJson.items[i].snippet.title}</p>
             <img src='${videoJson.items[i].snippet.thumbnails.default.url}'>
