@@ -24,8 +24,9 @@ function displayVideos(videoJson) {
     }
 }
 
-function displayComics() {
+function displayComics(comicsJson) {
     //Display a list of suggested comics for the searched character from Marvel's API
+    console.log(comicsJson);
 }
 
 function displayForum() {
@@ -42,7 +43,9 @@ function getRequests(searchTerm) {
 
     const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
     
-    console.log(urlOrigin);
+    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${searchTerm}&limit=1&apikey=${apiKeyMarvel}`;
+
+    console.log(urlComics);
 
     //This is using the comicvine API and it is not working. Documentation is very poor. Need more info.
     /*fetch(urlOrigin)
@@ -65,6 +68,18 @@ function getRequests(searchTerm) {
             throw new Error(response.statusText);
         })
         .then(responseJson => displayVideos(responseJson))
+        .catch(err => {
+            $('#js-error-message').text(`Something went wrong: ${err.message}`)
+        });
+
+    fetch(urlComics)
+        /*.then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })*/
+        .then(responseJson => displayComics(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
         });
