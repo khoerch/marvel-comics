@@ -40,11 +40,12 @@ function getRequests(searchTerm) {
     //Based on the search term, call the separate API requests and pass JSON messages to next functions to display the results
     const urlOrigin = `https://comicvine.gamespot.com/api/search/?api_key=${apiKeyComicVine}&format=json&resources=volume&field_list=name&query=${searchTerm}`;
 
-    const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm}`)}&type=video&key=${apiKeyYoutube}`; 
+    const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
     
     console.log(urlOrigin);
 
-    fetch(urlOrigin)
+    //This is using the comicvine API and it is not working. Documentation is very poor. Need more info.
+    /*fetch(urlOrigin)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -54,7 +55,7 @@ function getRequests(searchTerm) {
         .then(responseJson => displayOrigin(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });
+        });*/
 
     fetch(urlVideo)
         .then(response => {
