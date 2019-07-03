@@ -31,14 +31,6 @@ function displayComics(comicsJson) {
     //console.log(comicsJson);
 }
 
-function displayForum() {
-    //Based on today's date, display this weeks forum discussion from Reddit
-}
-
-function createStrings() {
-    //Create url strings for GET requests for each API. Should this be split up into multiple functions?
-}
-
 function getRequests(searchTerm) {
     //Based on the search term, call the separate API requests and pass JSON messages to next functions to display the results
     const urlOrigin = `https://comicvine.gamespot.com/api/search/?api_key=${apiKeyComicVine}&format=json&resources=volume&field_list=name&query=${searchTerm}`;
@@ -71,8 +63,9 @@ function getRequests(searchTerm) {
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
         });
-
-    fetch(urlComics)
+    
+    //Need approved domains to use public key to access API. Frustrating to test and debug/figure out
+    /*fetch(urlComics)
         .then(response => {
             if (response.ok) {
                 response => displayComics(response);
@@ -81,7 +74,7 @@ function getRequests(searchTerm) {
         })
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });
+        });*/
 }
 
 function validateSearch(searchTerm) {
