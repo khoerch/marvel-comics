@@ -43,7 +43,7 @@ function getRequests(searchTerm) {
 
     const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
     
-    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${searchTerm}&limit=1&apikey=${apiKeyMarvel}`;
+    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${encodeURIComponent(searchTerm)}&limit=1&apikey=${apiKeyMarvel}`;
 
     console.log(urlComics);
 
@@ -73,12 +73,12 @@ function getRequests(searchTerm) {
         });
 
     fetch(urlComics)
-        /*.then(response => {
+        .then(response => {
             if (response.ok) {
                 return response.json();
             }
             throw new Error(response.statusText);
-        })*/
+        })
         .then(responseJson => displayComics(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
