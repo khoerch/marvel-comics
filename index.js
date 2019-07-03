@@ -75,11 +75,10 @@ function getRequests(searchTerm) {
     fetch(urlComics)
         .then(response => {
             if (response.ok) {
-                return response.json();
+                response => displayComics(response);
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => displayComics(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
         });
