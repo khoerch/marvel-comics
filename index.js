@@ -48,7 +48,7 @@ function getRequests(searchTerm) {
     console.log(urlComics);
 
     //This is using the comicvine API and it is not working. Documentation is very poor. Need more info.
-    /*fetch(urlOrigin)
+    fetch(urlOrigin)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -58,7 +58,7 @@ function getRequests(searchTerm) {
         .then(responseJson => displayOrigin(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });*/
+        });
 
     fetch(urlVideo)
         .then(response => {
