@@ -7,7 +7,7 @@ const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
 function displayOrigin(originJson) {
     //Display the origin for the searched character from Comic Vine's API
-    console.log(originJson);
+    //console.log(originJson);
 }
 
 function displayVideos(videoJson) {
@@ -18,7 +18,9 @@ function displayVideos(videoJson) {
         $('#video-results').append(`
         <li>
             <p>${videoJson.items[i].snippet.title}</p>
-            <img src='${videoJson.items[i].snippet.thumbnails.default.url}'>
+            <a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a>
+            <p>${videoJson.items[i].snippet.description}</p>
+            <iframe src="https://www.youtube.com/embed/${videoJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </li>
         `);
     }
@@ -26,15 +28,7 @@ function displayVideos(videoJson) {
 
 function displayComics(comicsJson) {
     //Display a list of suggested comics for the searched character from Marvel's API
-    console.log(comicsJson);
-}
-
-function displayForum() {
-    //Based on today's date, display this weeks forum discussion from Reddit
-}
-
-function createStrings() {
-    //Create url strings for GET requests for each API. Should this be split up into multiple functions?
+    //console.log(comicsJson);
 }
 
 function getRequests(searchTerm) {
@@ -43,9 +37,7 @@ function getRequests(searchTerm) {
 
     const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
     
-    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${searchTerm}&limit=1&apikey=${apiKeyMarvel}`;
-
-    console.log(urlComics);
+    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${encodeURIComponent(searchTerm)}&limit=1&apikey=${apiKeyMarvel}`;
 
     //This is using the comicvine API and it is not working. Documentation is very poor. Need more info.
     fetch(urlOrigin)
@@ -71,18 +63,18 @@ function getRequests(searchTerm) {
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
         });
-
-    fetch(urlComics)
-        /*.then(response => {
+    
+    //Need approved domains to use public key to access API. Frustrating to test and debug/figure out
+    /*fetch(urlComics)
+        .then(response => {
             if (response.ok) {
-                return response.json();
+                response => displayComics(response);
             }
             throw new Error(response.statusText);
-        })*/
-        .then(responseJson => displayComics(responseJson))
+        })
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });
+        });*/
 }
 
 function validateSearch(searchTerm) {
