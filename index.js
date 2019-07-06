@@ -26,31 +26,29 @@ function displayVideos(videoJson) {
     }
 }
 
-function displayComics(comicsJson) {
-    //Display a list of suggested comics for the searched character from Marvel's API
-    //console.log(comicsJson);
+function displayComics(comicJson) {
+    //Edits the DOM to add collection of comics based on the unique ID of the character
+    console.log(comicJson);
+    for (let i=0; i<comicJson.length; i++) {
+      $('ul').append(`
+      <li>
+        <p>${comicJson[i].title}</p>
+        <a href="${comicJson[i].urls[0].url}" target="_blank"><img src="${comicJson[i].images[0].path}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank">Start Reading!</a>
+      </li>
+    `)
+    }
 }
 
-function getRequests(searchTerm) {
+function getOrigin(searchTerm) {
+    //Calls the Comicvine api to return background information on the character
+    console.log(searchTerm + 'hello origin');
+}
+
+function getVideo(searchTerm) {
     //Based on the search term, call the separate API requests and pass JSON messages to next functions to display the results
-    const urlOrigin = `https://comicvine.gamespot.com/api/search/?api_key=${apiKeyComicVine}&format=json&resources=volume&field_list=name&query=${searchTerm}`;
-
-    const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
     
-    const urlComics = `https://gateway.marvel.com:443/v1/public/characters?name=${encodeURIComponent(searchTerm)}&limit=1&apikey=${apiKeyMarvel}`;
-
-    //This is using the comicvine API and it is not working. Documentation is very poor. Need more info.
-    fetch(urlOrigin)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-        .then(responseJson => displayOrigin(responseJson))
-        .catch(err => {
-            $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });
+    const urlVideo = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${encodeURIComponent(`history of ${searchTerm} comics`)}&type=video&key=${apiKeyYoutube}`; 
 
     fetch(urlVideo)
         .then(response => {
@@ -63,23 +61,42 @@ function getRequests(searchTerm) {
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`)
         });
-    
-    //Need approved domains to use public key to access API. Frustrating to test and debug/figure out
-    /*fetch(urlComics)
-        .then(response => {
-            if (response.ok) {
-                response => displayComics(response);
-            }
-            throw new Error(response.statusText);
-        })
-        .catch(err => {
-            $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });*/
 }
 
-function validateSearch(searchTerm) {
+function getComics(id) {
+    //Takes the unique character ID and returns a selection of comics for readers to start with based on the character
+    const urlComics = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?format=comic&formatType=comic&noVariants=true&issueNumber=1&orderBy=-onsaleDate&limit=5&apikey=${apiKeyMarvel}`;
+  
+    fetch(urlComics)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } throw new Error(response.statusText);
+      })
+      .then(responseJson => displayComics(responseJson.data.results))
+      .catch(err => console.log(err.message));
+}
+
+function getMarvel(searchTerm) {
+    //Function to return the unique character ID from Marvel in order to retrieve comics and validate the search term. 
+    const urlMarvel = `https://gateway.marvel.com:443/v1/public/characters?name=${searchTerm}&limit=1&apikey=${apiKeyMarvel}`;
+
+    fetch(urlMarvel)
+        .then(response => {
+        if (response.ok) {
+            return response.json()
+        } throw new Error(response.statusText);
+        })
+        .then(responseJson => {
+            getComics(responseJson.data.results[0].id));
+            validateSearch(responseJson.data.results[0].id)
+        }
+        .catch(err => console.log(err.message));
+}
+
+function validateSearch(id) {
     //Check that the search term is a valid character
-    console.log(searchTerm + ' hello!');
+    console.log(id + ' hello!');
 }
 
 function watchForm() {
@@ -87,8 +104,9 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const searchTerm = $('#js-character-search').val();
-        validateSearch(searchTerm);
-        getRequests(searchTerm);
+        getOrigin(searchTerm);
+        getVideo(searchTerm);
+        getMarvel(searchTerm);
     })
 }
 
