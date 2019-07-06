@@ -30,7 +30,7 @@ function displayComics(comicJson) {
     //Edits the DOM to add collection of comics based on the unique ID of the character
     console.log(comicJson);
     for (let i=0; i<comicJson.length; i++) {
-      $('ul').append(`
+      $('#js-comics').append(`
       <li>
         <p>${comicJson[i].title}</p>
         <a href="${comicJson[i].urls[0].url}" target="_blank"><img src="${comicJson[i].images[0].path}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
