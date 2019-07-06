@@ -29,6 +29,7 @@ function displayVideos(videoJson) {
 function displayComics(comicJson) {
     //Edits the DOM to add collection of comics based on the unique ID of the character
     console.log(comicJson);
+    $('#js-comics').empty();
     for (let i=0; i<comicJson.length; i++) {
       $('#js-comics').append(`
       <li>
