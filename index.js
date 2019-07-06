@@ -88,9 +88,9 @@ function getMarvel(searchTerm) {
         } throw new Error(response.statusText);
         })
         .then(responseJson => {
-            getComics(responseJson.data.results[0].id));
-            validateSearch(responseJson.data.results[0].id)
-        }
+            getComics(responseJson.data.results[0].id);
+            validateSearch(responseJson.data.results[0].id);
+        })
         .catch(err => console.log(err.message));
 }
 
