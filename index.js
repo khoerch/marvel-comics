@@ -157,8 +157,8 @@ function watchForm() {
         event.preventDefault();
         const searchTerm = $('#js-character-search').val();
         getOrigin(searchTerm);
-        //getVideo(searchTerm);
-        //getMarvel(searchTerm);
+        getVideo(searchTerm);
+        getMarvel(searchTerm);
     })
 }
 
