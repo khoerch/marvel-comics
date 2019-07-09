@@ -8,6 +8,19 @@ const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
     console.log(characterInfo);
+    $('.origin').empty();
+    $('.origin').append(`
+        <h3>${characterInfo.name}</h3>
+        <p>${characterInfo.bio}</p>
+        <p>Aliases: ${characterInfo.aliases}</p>
+        <ul class="aliases">
+
+        </ul>
+        <img src="${characterInfo.image}" alt="character image">
+        <h3>Origin</h3>
+        <p>${characterInfo.description}</p>
+        <p>Learn more at <a href="${characterInfo.sourceUrl}" target="_blank">ComicVine.com</a>.</p>
+    `);
 }
 
 function displayVideos(videoJson) {
@@ -69,7 +82,9 @@ function getOrigin(searchTerm) {
             return $.parseXML(xmlText);
         })
         .then(xmlDoc => {
+            console.log(xmlDoc);
             const characterInfo = {
+                name: removeCDATA(xmlDoc.getElementsByTagName('name')[1].innerHTML),
                 aliases: removeCDATA(xmlDoc.getElementsByTagName('aliases')[0].innerHTML).split("\r\n"),
                 sourceUrl: removeCDATA(xmlDoc.getElementsByTagName('site_detail_url')[0].innerHTML),
                 image: removeCDATA(xmlDoc.getElementsByTagName('medium_url')[0].innerHTML),
