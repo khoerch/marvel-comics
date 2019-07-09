@@ -5,9 +5,9 @@ const apiKeyYoutube = 'AIzaSyCjJlcZ8mjV7x4ZMHjBJ-FisBk_K2hZeG0';
 const apiKeyMarvel = 'e7fbac215917563a2dd01a2a025fdada';
 const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
-function displayOrigin(originJson) {
+function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
-    //console.log(originJson);
+    console.log(characterInfo);
 }
 
 function displayVideos(videoJson) {
@@ -43,7 +43,43 @@ function displayComics(comicJson) {
 
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
-    console.log(searchTerm + 'hello origin');
+    const url = "https://comicvine.gamespot.com/api/";
+
+    const params = $.param({
+        query: searchTerm,
+        limit: 1,
+        resources: 'character',
+        api_key: apiKeyComicVine
+    });
+
+    function removeCDATA(data) {
+        //This function removes a problematic CDATA tag in the XML so I can work with it. Previous attempts to convert the data to JSON were not working so switched to working with the XML directing
+        return data.replace("<![CDATA[","")
+                   .replace("]]>", "");
+    }
+
+    fetch(`https://cors-anywhere.herokuapp.com/${url}search?${params}`)
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(xmlText => {
+            return $.parseXML(xmlText);
+        })
+        .then(xmlDoc => {
+            const characterInfo = {
+                aliases: removeCDATA(xmlDoc.getElementsByTagName('aliases')[0].innerHTML).split("\r\n"),
+                sourceUrl: removeCDATA(xmlDoc.getElementsByTagName('site_detail_url')[0].innerHTML),
+                image: removeCDATA(xmlDoc.getElementsByTagName('medium_url')[0].innerHTML),
+                bio: removeCDATA(xmlDoc.getElementsByTagName('deck')[0].innerHTML),
+                description: xmlDoc.getElementsByTagName('description')[0].innerHTML.replace(/<[^>]*>?/gm, '').split("Creation")[0].substring(6),
+            }
+
+            displayOrigin(characterInfo);
+        })
+        .catch(err => console.log(err.message));
 }
 
 function getVideo(searchTerm) {
@@ -106,8 +142,8 @@ function watchForm() {
         event.preventDefault();
         const searchTerm = $('#js-character-search').val();
         getOrigin(searchTerm);
-        getVideo(searchTerm);
-        getMarvel(searchTerm);
+        //getVideo(searchTerm);
+        //getMarvel(searchTerm);
     })
 }
 
