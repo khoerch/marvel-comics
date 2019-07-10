@@ -1,4 +1,4 @@
-'use strict'
+// This is a list of all available characters from the Marvel API. I will use this to validate searches and to autocomplete searches to make things easier on the user. See the character-log.js file for information on how this information was found and collected. 
 
 const characters = [
     "3-D Man",
@@ -1495,8 +1495,3 @@ const characters = [
 ]
 
   
-function characterDropDown() {
-    $('#js-character-search').autocomplete({source: characters});
-}
-
-$(characterDropDown);

@@ -1,13 +1,30 @@
 'use strict';
 
-//Should I create an object with API endpoints and keys as key value pairs?
+
+// This uses the array of characters in the characters.js file to autocomplete the search term for the user
+$(function characterDropDown() {
+    $('#js-character-search').autocomplete({source: characters});
+});
+
+
+/* 
+    The rest of the code below handles the API calls and displaying the 
+    data coming from these sources. API keys are listed for easy access.
+*/
+
 const apiKeyYoutube = 'AIzaSyCjJlcZ8mjV7x4ZMHjBJ-FisBk_K2hZeG0';
 const apiKeyMarvel = 'e7fbac215917563a2dd01a2a025fdada';
 const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
+function displayError(searchTerm) {
+    // This function tells the user that their search term is invalid and encourages them to try again
+    $('#js-error-message').empty().append(`
+        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include capitals and hyphens where appropriate. 
+    `);
+}
+
 function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
-    console.log(characterInfo);
     $('.origin').empty();
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>
@@ -25,7 +42,6 @@ function displayOrigin(characterInfo) {
 
 function displayVideos(videoJson) {
     //Display videos from YouTube based on the searched character
-    console.log(videoJson);
     $('#video-results').empty();
     for (let i = 0; i < videoJson.items.length; i++) {
         $('#video-results').append(`
@@ -41,7 +57,6 @@ function displayVideos(videoJson) {
 
 function displayComics(comicJson) {
     //Edits the DOM to add collection of comics based on the unique ID of the character
-    console.log(comicJson);
     $('#js-comics').empty();
     for (let i=0; i<comicJson.length; i++) {
       $('#js-comics').append(`
@@ -56,10 +71,13 @@ function displayComics(comicJson) {
 
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
+    const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
+    console.log(newTerm);
+
     const url = "https://comicvine.gamespot.com/api/";
 
     const params = $.param({
-        query: searchTerm,
+        query: newTerm,
         limit: 1,
         resources: 'character',
         api_key: apiKeyComicVine
@@ -82,7 +100,6 @@ function getOrigin(searchTerm) {
             return $.parseXML(xmlText);
         })
         .then(xmlDoc => {
-            console.log(xmlDoc);
             const characterInfo = {
                 name: removeCDATA(xmlDoc.getElementsByTagName('name')[1].innerHTML),
                 aliases: removeCDATA(xmlDoc.getElementsByTagName('aliases')[0].innerHTML).split("\r\n"),
@@ -110,9 +127,7 @@ function getVideo(searchTerm) {
             throw new Error(response.statusText);
         })
         .then(responseJson => displayVideos(responseJson))
-        .catch(err => {
-            $('#js-error-message').text(`Something went wrong: ${err.message}`)
-        });
+        .catch(err => console.log(err.message));
 }
 
 function getComics(id) {
@@ -141,14 +156,23 @@ function getMarvel(searchTerm) {
         })
         .then(responseJson => {
             getComics(responseJson.data.results[0].id);
-            validateSearch(responseJson.data.results[0].id);
         })
         .catch(err => console.log(err.message));
 }
 
-function validateSearch(id) {
+function validateSearch(searchTerm) {
     //Check that the search term is a valid character
-    console.log(id + ' hello!');
+    console.log(searchTerm);
+    if (!characters.includes(searchTerm)) {
+        const searchError = new Error('Character not found');
+        console.log(searchError.message);
+        displayError(searchTerm);
+    } else {
+        console.log('Character found');
+        getOrigin(searchTerm);
+        getVideo(searchTerm);
+        getMarvel(searchTerm);
+    }
 }
 
 function watchForm() {
@@ -156,9 +180,7 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const searchTerm = $('#js-character-search').val();
-        getOrigin(searchTerm);
-        getVideo(searchTerm);
-        getMarvel(searchTerm);
+        validateSearch(searchTerm);
     })
 }
 
