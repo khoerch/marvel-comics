@@ -51,8 +51,8 @@ function displayVideos(videoJson) {
         $('#video-results').append(`
         <li>
             <p>${videoJson.items[i].snippet.title}</p>
-            <p> YouTube Channel:<a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a></p>
             <iframe src="https://www.youtube.com/embed/${videoJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p> YouTube Channel: <a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a></p>
         </li>
         `);
     }
@@ -179,7 +179,6 @@ function getMarvel(searchTerm) {
 function validateSearch(formInput) {
     //Check that the search term is a valid character
     const searchTerm = formInput.toLowerCase();
-    console.log(searchTerm);
     if (!characters.includes(searchTerm)) {
         const searchError = new Error('Character not found');
         console.log(searchError.message);
@@ -197,8 +196,23 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const formInput = $('#js-character-search').val();
+        console.log('User input: ' + formInput);
         validateSearch(formInput);
     })
 }
 
+function randomClick() {
+    // Watches for a user to click on the random character button and returns a random item from the characters array
+    $('.js-random').click(event => {
+        console.log('Random click');
+        const randNum = Math.floor(Math.random() * 1491);
+        console.log('Random character: ' + characters[randNum]);
+
+        getOrigin(characters[randNum]);
+        getVideo(characters[randNum]);
+        getMarvel(characters[randNum]);
+    })
+}
+
+$(randomClick);
 $(watchForm);
