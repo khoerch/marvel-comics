@@ -18,13 +18,28 @@
 
         <header>
             <h1>Are you interested in comics?</h1>
-            <p>So you've seen the movies and want the stories to continue. Marvel has nearly 80 years of comics to explore and endless stories to enjoy! But getting into comics can be intimidating. This resource helps new and old readers to continue on their journey.</p>
+            <p>So you've seen the movies and want the stories to continue. Marvel has nearly 80 years of comics to explore and endless stories to enjoy! But getting into comics can be intimidating! This resource helps new and old readers to continue on their journey.</p>
+
+            <section>
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><button class="js-quick-link" type="button" value="Carol Danvers">Captain Marvel<img src="" alt="character-profile"></button></li>
+                    <li><button class="js-quick-link" type="button" value="Iron Man">Iron Man<img src="" alt="character-profile"></button></li>
+                    <li><button class="js-quick-link" type="button" value="Jean Grey">Jean Grey (Phoenix)<img src="" alt="character-profile"></button></li>
+                    <li><button class="js-quick-link" type="button" value="Black Panther">Black Panther<img src="" alt="character-profile"></button></li>
+                    <li><button class="js-quick-link" type="button" value="Captain America">Captain America<img src="" alt="character-profile"></button></li>
+                    <li><button class="js-quick-link" type="button" value="Black Widow">Black Widow<img src="" alt="character-profile"></button></li>
+                </ul>
+            </section>
+
             <form action="#" class="marvel-search" id="js-form">
                 <label for="character-search">Search your favorite Marvel character below!</label>
                 <input type="text" name="character-search" id="js-character-search" placeholder="ex: Black Panther">
                 <input type="submit" value="Search!" class="button">
             </form>
+
             <button class="button js-random" type="button">Random Character!</button>
+
             <p>Need help? Find a list of all Marvel characters <a href="https://www.marvel.com/characters" target="_blank">here</a>!</p>
             <p id="js-error-message"></p>
         </header>
@@ -110,6 +125,7 @@
                     <li><a href="https://www.comicbookherald.com/" target="_blank">Comic Book Herald</a>: Great resource for reading lists of events and characters</li>
                     <li><a href="https://www.reddit.com/r/Marvel/" target="_blank">r/marvel</a>: Join the conversation! A subreddit for everything Marvel!</li>
                     <li><a href="https://www.reddit.com/r/comicbooks/" target="_blank">r/comicbooks</a>: Another subreddit for the wider world of comics!</li>
+                    <li><a href="https://www.marvel.com/watch/digital-series/marvel-101">Marvel 101</a>: Get a quick background on your favorite characters and storylines!</li>
                     <li><a href="https://www.youtube.com/channel/UC4kjDjhexSVuC8JWk4ZanFw" target="_blank">Variant YouTube Channel</a>: Great channel for quick histories on your favorite characters</li>
                     <li><a href="https://www.marvel.com/" target="_blank">Marvel.com</a>When in doubt, go to the source!</li>
                 </ul>
@@ -122,7 +138,7 @@
         </footer>
 
         <script src="https://code.jquery.com/jquery.min.js"></script>
-        <!-- This is a jquery resource that also includes an autocomplete feature for the search bar. -->
+        <!-- This is a jquery resource that includes an autocomplete feature for the search bar. -->
         <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src="characters.js"></script>
         <script type="text/javascript" src="index.js"></script>

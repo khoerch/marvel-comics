@@ -75,7 +75,7 @@ function displayComics(comicJson) {
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
     const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
-    console.log('Comicvine Serch: ' + newTerm);
+    console.log('Comicvine Search: ' + newTerm);
 
     const url = "https://comicvine.gamespot.com/api/";
 
@@ -214,5 +214,18 @@ function randomClick() {
     })
 }
 
+function quickLink() {
+    // Makes appropriate API calls and DOM manipulation if users click on one of the quick links at the top
+    $('.js-quick-link').click(function() {
+        let linkVal = $(this).val();
+        console.log('Quick Link: ' + linkVal);
+
+        getOrigin(linkVal);
+        getVideo(linkVal);
+        getMarvel(linkVal);
+    })
+}
+
+$(quickLink);
 $(randomClick);
 $(watchForm);
