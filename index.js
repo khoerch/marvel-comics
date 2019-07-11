@@ -47,8 +47,7 @@ function displayVideos(videoJson) {
         $('#video-results').append(`
         <li>
             <p>${videoJson.items[i].snippet.title}</p>
-            <a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a>
-            <p>${videoJson.items[i].snippet.description}</p>
+            <p> YouTube Channel:<a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a></p>
             <iframe src="https://www.youtube.com/embed/${videoJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </li>
         `);
@@ -133,6 +132,8 @@ function getVideo(searchTerm) {
 function getComics(id) {
     //Takes the unique character ID and returns a selection of comics for readers to start with based on the character
     const urlComics = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?format=comic&formatType=comic&noVariants=true&issueNumber=1&orderBy=-onsaleDate&limit=5&apikey=${apiKeyMarvel}`;
+
+    console.log(id);
   
     fetch(urlComics)
       .then(response => {
@@ -160,8 +161,9 @@ function getMarvel(searchTerm) {
         .catch(err => console.log(err.message));
 }
 
-function validateSearch(searchTerm) {
+function validateSearch(formInput) {
     //Check that the search term is a valid character
+    const searchTerm = formInput.toLowerCase();
     console.log(searchTerm);
     if (!characters.includes(searchTerm)) {
         const searchError = new Error('Character not found');
@@ -179,8 +181,8 @@ function watchForm() {
     //Waits for the user to submit the form. Once they do it logs value and passes it to the next function
     $('form').submit(event => {
         event.preventDefault();
-        const searchTerm = $('#js-character-search').val();
-        validateSearch(searchTerm);
+        const formInput = $('#js-character-search').val();
+        validateSearch(formInput);
     })
 }
 

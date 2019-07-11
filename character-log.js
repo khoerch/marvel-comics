@@ -81,7 +81,7 @@ Promise.all(offsets.map(o => fetchData(o))).then(
     let characters = [];
     for (const result of r) {
       for (const character of result.data.results) {
-        characters.push(character.name);
+        characters.push(character.name.toLowerCase());
       }
     }
 
