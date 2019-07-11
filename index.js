@@ -29,7 +29,7 @@ function displayOrigin(characterInfo) {
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>
         <p>${characterInfo.bio}</p>
-        <p>Aliases: ${characterInfo.aliases}</p>
+        <p>Aliases:</p>
         <ul class="aliases">
 
         </ul>
@@ -38,6 +38,10 @@ function displayOrigin(characterInfo) {
         <p>${characterInfo.description}</p>
         <p>Learn more at <a href="${characterInfo.sourceUrl}" target="_blank">ComicVine.com</a>.</p>
     `);
+    for (let i = 0; i < characterInfo.aliases.length; i++) {
+        $('.aliases').append(`
+            <li>${characterInfo.aliases[i]}</li>
+    `)};
 }
 
 function displayVideos(videoJson) {
@@ -71,7 +75,7 @@ function displayComics(comicJson) {
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
     const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
-    console.log(newTerm);
+    console.log('Comicvine Serch: ' + newTerm);
 
     const url = "https://comicvine.gamespot.com/api/";
 
@@ -131,11 +135,22 @@ function getVideo(searchTerm) {
 
 function getComics(id) {
     //Takes the unique character ID and returns a selection of comics for readers to start with based on the character
-    const urlComics = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?format=comic&formatType=comic&noVariants=true&issueNumber=1&orderBy=-onsaleDate&limit=5&apikey=${apiKeyMarvel}`;
+    const urlComics = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?`;
 
     console.log(id);
+
+    const params = $.param({
+        format: 'comic',
+        formatType: 'comic',
+        noVariants: true,
+        issueNumber: 1,
+        hasDigitalIssue: true,
+        orderBy: 'onsaleDate',
+        limit: 5,
+        apikey: apiKeyMarvel,
+    })
   
-    fetch(urlComics)
+    fetch(urlComics + params)
       .then(response => {
         if (response.ok) {
           return response.json()
