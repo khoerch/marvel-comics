@@ -74,13 +74,13 @@ function displayComics(comicJson) {
 
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
-    const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
-    console.log('Comicvine Search: ' + newTerm);
+    //const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
+    //console.log('Comicvine Search: ' + newTerm);
 
     const url = "https://comicvine.gamespot.com/api/";
 
     const params = $.param({
-        query: newTerm,
+        query: searchTerm,
         limit: 1,
         resources: 'character',
         api_key: apiKeyComicVine
