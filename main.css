@@ -18,13 +18,11 @@ a {
 	color: #151515;
 }
 
-.quick-images {
-    height: 200px;
-    width: 200px;
-    border-radius: 100%;
+img {
+	width: 300px;
 }
 
-.js-quick-link {
+button {
     background: none;
 	color: inherit;
 	border: none;
@@ -32,10 +30,6 @@ a {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-}
-
-img {
-	width: 300px;
 }
 
 /* Nav and footer styling */
@@ -59,4 +53,28 @@ footer p {
 
 .link-on-dark {
 	color: #c3c3c3;
+	border: solid #c3c3c3 2px;
+	padding: 5px;
 }
+
+/* Header styling */
+header {
+	color: #ffffff;
+	background: #151515;
+	padding: 5%;
+}
+
+header p, label {
+	font-size: 1.2em;
+}
+
+.quick-links {
+	display: flex;
+	flex-direction: column;
+}
+
+.quick-images {
+    width: 40%;
+    border-radius: 100%;
+}
+
