@@ -72,53 +72,14 @@ function displayComics(comicJson) {
     }
 }
 
-function getOriginQuickLinks(searchTerm) {
-    //Copy of the function below. Same function but does not remove the information in parenthesis from the search term. This solves a problem with the Captain Marvel search as there are so many characters with that name. Since she is a particularly popular version of the character, I wanted to make sure the correct information is called. Calls the Comicvine api to return background information on the character
-    console.log('Comicvine Search: ' + searchTerm);
-
-    const url = "https://comicvine.gamespot.com/api/";
-
-    const params = $.param({
-        query: searchTerm,
-        limit: 1,
-        resources: 'character',
-        api_key: apiKeyComicVine
-    });
-
-    function removeCDATA(data) {
-        //This function removes a problematic CDATA tag in the XML so I can work with it. Previous attempts to convert the data to JSON were not working so switched to working with the XML directing
-        return data.replace("<![CDATA[","")
-                   .replace("]]>", "");
-    }
-
-    fetch(`https://cors-anywhere.herokuapp.com/${url}search?${params}`)
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            }
-            throw new Error(response.statusText);
-        })
-        .then(xmlText => {
-            return $.parseXML(xmlText);
-        })
-        .then(xmlDoc => {
-            const characterInfo = {
-                name: removeCDATA(xmlDoc.getElementsByTagName('name')[1].innerHTML),
-                aliases: removeCDATA(xmlDoc.getElementsByTagName('aliases')[0].innerHTML).split("\r\n"),
-                sourceUrl: removeCDATA(xmlDoc.getElementsByTagName('site_detail_url')[0].innerHTML),
-                image: removeCDATA(xmlDoc.getElementsByTagName('medium_url')[0].innerHTML),
-                bio: removeCDATA(xmlDoc.getElementsByTagName('deck')[0].innerHTML),
-                description: xmlDoc.getElementsByTagName('description')[0].innerHTML.replace(/<[^>]*>?/gm, '').split("Creation")[0].substring(6),
-            }
-
-            displayOrigin(characterInfo);
-        })
-        .catch(err => console.log(err.message));
-}
-
 function getOrigin(searchTerm) {
     //Calls the Comicvine api to return background information on the character
-    const newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
+    let newTerm = searchTerm;
+    // Most of the time, parenthesis after a name messes with the comicvine searches. However, its important for differentiating between the different Captain Marvel characters. This statements helps with that issue. 
+    if (newTerm.slice(0, 7).toLowerCase() !== 'captain') {
+        newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
+    }
+    
     console.log('Comicvine Search: ' + newTerm);
 
     const url = "https://comicvine.gamespot.com/api/";
@@ -264,7 +225,7 @@ function quickLink() {
         let linkVal = $(this).val();
         console.log('Quick Link: ' + linkVal);
 
-        getOriginQuickLinks(linkVal);
+        getOrigin(linkVal);
         getVideo(linkVal);
         getMarvel(linkVal);
     })
