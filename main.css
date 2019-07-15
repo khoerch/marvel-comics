@@ -68,13 +68,23 @@ header p, label {
 	font-size: 1.2em;
 }
 
+.header-blocks {
+	margin-bottom: 10%;
+}
+
 .quick-links {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.js-quick-link {
+	margin: 10px;
+	width: 130px;
 }
 
 .quick-images {
-    width: 40%;
+    width: inherit;
     border-radius: 100%;
 }
 
