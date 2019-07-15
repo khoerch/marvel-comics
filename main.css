@@ -79,7 +79,7 @@ footer p {
 .link-on-dark {
 	color: #ffffff;
 	border: solid #ffffff 2px;
-	padding: 5px;
+	padding: 5px 15px;
 	text-decoration: none;
 	font-weight: 200;
 }
@@ -214,4 +214,24 @@ main {
 
 .helpful-links li {
 	margin: 20px 0;
+}
+
+/* Responsive styling for larger screens */
+
+@media screen and (min-width: 475px) {
+	main {
+		padding: 10%;
+	}
+	
+	.js-quick-link {
+		width: 180px;
+	}
+
+	img {
+		max-width: 385px;
+	}
+}
+
+@media screen and (min-width: 830px) {
+
 }
