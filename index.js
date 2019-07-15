@@ -18,13 +18,14 @@ const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
 function displayError(searchTerm) {
     // This function tells the user that their search term is invalid and encourages them to try again
-    $('#js-error-message').empty().append(`
-        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include capitals and hyphens where appropriate. 
+    $('#js-error-message').empty().removeClass('hidden').append(`
+        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include hyphens and other characters where appropriate. 
     `);
 }
 
 function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
+    $('#js-error-message').empty().addClass('hidden');
     $('.origin').empty();
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>

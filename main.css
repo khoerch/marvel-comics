@@ -13,9 +13,27 @@ h1, h2, h3 {
 	font-weight: bold;
 }
 
+h1 {
+	font-size: 300%;
+}
+
+h2 { 
+	font-size: 225%;
+}
+
+h3 { 
+	font-size: 150%;
+}
+
 a {
-	text-decoration: none;
-	color: #151515;
+	color: #e62429;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 img {
@@ -30,6 +48,10 @@ button {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+}
+
+.hidden {
+	display: none;
 }
 
 /* Nav and footer styling */
@@ -52,9 +74,11 @@ footer p {
 }
 
 .link-on-dark {
-	color: #c3c3c3;
-	border: solid #c3c3c3 2px;
+	color: #ffffff;
+	border: solid #ffffff 2px;
 	padding: 5px;
+	text-decoration: none;
+	font-weight: 200;
 }
 
 /* Header styling */
@@ -69,7 +93,7 @@ header p, label {
 }
 
 .header-blocks {
-	margin-bottom: 10%;
+	margin-bottom: 15%;
 }
 
 .quick-links {
@@ -80,7 +104,7 @@ header p, label {
 
 .js-quick-link {
 	margin: 10px;
-	width: 130px;
+	width: 125px;
 }
 
 .quick-images {
@@ -88,3 +112,57 @@ header p, label {
     border-radius: 100%;
 }
 
+.marvel-search {
+	display: flex;
+	flex-direction: column;
+}
+
+.search-items {
+	margin: 15px 0px;
+	max-width: 325px;
+}
+
+input[type=text] {
+	border: none;
+	height: 40px;
+	padding-left: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.button {
+	display: block;
+	color: #ffffff;
+	background: none;
+	border: solid white 2px;
+	height: 50px;
+	width: 175px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#js-error-message {
+	background: #e62429;
+	color: white;
+	padding: 5px;
+}
+
+/* Main Styling */
+
+.red-bar {
+	width: 100%;
+	height: 30px;
+	background: #e62429;
+}
+
+main {
+	padding: 5%;
+	background-image: linear-gradient(
+		white,
+		white,
+		white,
+		white,
+		white,
+		#c3c3c3 95%
+	);
+}
