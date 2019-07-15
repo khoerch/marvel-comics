@@ -30,11 +30,11 @@ function displayOrigin(characterInfo) {
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>
         <p>${characterInfo.bio}</p>
-        <p>Aliases:</p>
+        <img src="${characterInfo.image}" alt="character image">
+        <h3>Aliases:</h3>
         <ul class="aliases">
 
         </ul>
-        <img src="${characterInfo.image}" alt="character image">
         <h3>Origin</h3>
         <p>${characterInfo.description}</p>
         <p>Learn more at <a href="${characterInfo.sourceUrl}" target="_blank">ComicVine.com</a>.</p>
@@ -51,7 +51,7 @@ function displayVideos(videoJson) {
     for (let i = 0; i < videoJson.items.length; i++) {
         $('#video-results').append(`
         <li>
-            <p>${videoJson.items[i].snippet.title}</p>
+            <h3>${videoJson.items[i].snippet.title}</h3>
             <iframe src="https://www.youtube.com/embed/${videoJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <p> YouTube Channel: <a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a></p>
         </li>

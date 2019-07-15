@@ -37,7 +37,10 @@ ul {
 }
 
 img {
-	width: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
 }
 
 button {
@@ -163,6 +166,26 @@ main {
 		white,
 		white,
 		white,
+		white,
+		white,
 		#c3c3c3 95%
 	);
+}
+
+.result-blocks {
+	margin-bottom: 15%;
+}
+
+.aliases {
+	columns: 125px auto;
+	background: #c3c3c3;
+}
+
+.aliases li {
+	padding: 10px;
+	font-weight: bold;
+}
+
+#video-results li {
+	margin: 40px 0;
 }
