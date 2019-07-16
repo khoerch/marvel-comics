@@ -30,5 +30,10 @@ A few notes on the environment needed to run this site. The Marvel Comics API re
 * Return YouTube videos that give a history of the characters
 * See covers and links to comics that serve as jumping off points for the characters
 
+## Contributing 
+Are you interested in adding to the project? You can find some helpful documentation below
+- [Marvel API](https://developer.marvel.com/)
+- [ComicVine](https://comicvine.gamespot.com/api/)
+
 ## Authors
 * Kevin Hoercher
