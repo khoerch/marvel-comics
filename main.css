@@ -1,3 +1,5 @@
+/* Document wide styling */
+
 * {
     box-sizing: border-box;
 }
@@ -167,6 +169,7 @@ input[type=text] {
 	background: #e62429;
 	color: white;
 	padding: 5px;
+	border-radius: 3px;
 }
 
 /* Main Styling */
