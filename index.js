@@ -194,6 +194,8 @@ function validateSearch(formInput) {
         getOrigin(searchTerm);
         getVideo(searchTerm);
         getMarvel(searchTerm);
+        const position = $('#scroll-to').offset();
+        $('html, body').stop().animate({ scrollTop: position.top }, 2000);
     }
 }
 
@@ -232,6 +234,15 @@ function quickLink() {
     })
 }
 
+function scrollTo() {
+    // Scrolls the window to the results from a search, quick link, or random selection
+    $('.scroll').click(function(event) {
+        const position = $('#scroll-to').offset();
+        $('html, body').stop().animate({ scrollTop: position.top }, 2000);
+    })
+}
+
 $(quickLink);
 $(randomClick);
 $(watchForm);
+$(scrollTo);
