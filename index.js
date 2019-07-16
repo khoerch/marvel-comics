@@ -18,22 +18,23 @@ const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
 function displayError(searchTerm) {
     // This function tells the user that their search term is invalid and encourages them to try again
-    $('#js-error-message').empty().append(`
-        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include capitals and hyphens where appropriate. 
+    $('#js-error-message').empty().removeClass('hidden').append(`
+        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include hyphens and other characters where appropriate. 
     `);
 }
 
 function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
+    $('#js-error-message').empty().addClass('hidden');
     $('.origin').empty();
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>
         <p>${characterInfo.bio}</p>
-        <p>Aliases:</p>
+        <img src="${characterInfo.image}" alt="character image">
+        <h3>Aliases:</h3>
         <ul class="aliases">
 
         </ul>
-        <img src="${characterInfo.image}" alt="character image">
         <h3>Origin</h3>
         <p>${characterInfo.description}</p>
         <p>Learn more at <a href="${characterInfo.sourceUrl}" target="_blank">ComicVine.com</a>.</p>
@@ -50,7 +51,7 @@ function displayVideos(videoJson) {
     for (let i = 0; i < videoJson.items.length; i++) {
         $('#video-results').append(`
         <li>
-            <p>${videoJson.items[i].snippet.title}</p>
+            <h3>${videoJson.items[i].snippet.title}</h3>
             <iframe src="https://www.youtube.com/embed/${videoJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <p> YouTube Channel: <a href="https://www.youtube.com/channel/${videoJson.items[i].snippet.channelId}" target="_blank">${videoJson.items[i].snippet.channelTitle}</a></p>
         </li>
@@ -65,8 +66,8 @@ function displayComics(comicJson) {
       $('#js-comics').append(`
       <li>
         <p>${comicJson[i].title}</p>
-        <a href="${comicJson[i].urls[0].url}" target="_blank"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
-        <a href="${comicJson[i].urls[0].url}" target="_blank">Start Reading!</a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank" class="red-button">READ NOW</a>
       </li>
     `)
     }
@@ -193,6 +194,8 @@ function validateSearch(formInput) {
         getOrigin(searchTerm);
         getVideo(searchTerm);
         getMarvel(searchTerm);
+        const position = $('#scroll-to').offset();
+        $('html, body').stop().animate({ scrollTop: position.top }, 2000);
     }
 }
 
@@ -231,6 +234,15 @@ function quickLink() {
     })
 }
 
+function scrollTo() {
+    // Scrolls the window to the results from a search, quick link, or random selection
+    $('.scroll').click(function(event) {
+        const position = $('#scroll-to').offset();
+        $('html, body').stop().animate({ scrollTop: position.top }, 2000);
+    })
+}
+
 $(quickLink);
 $(randomClick);
 $(watchForm);
+$(scrollTo);

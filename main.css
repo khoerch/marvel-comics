@@ -3,6 +3,7 @@
 }
 
 body {
+	background: #151515;
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	color: #151515;
@@ -13,13 +14,34 @@ h1, h2, h3 {
 	font-weight: bold;
 }
 
+h1 {
+	font-size: 300%;
+}
+
+h2 { 
+	font-size: 225%;
+}
+
+h3 { 
+	font-size: 150%;
+}
+
 a {
-	text-decoration: none;
-	color: #151515;
+	color: #e62429;
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 img {
-	width: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
 }
 
 button {
@@ -32,12 +54,30 @@ button {
 	outline: inherit;
 }
 
+.red-button {
+	background: #e62429;
+	padding: 15px 20px;
+	width: 175px;
+	color: white;
+	text-decoration: none;
+	border-radius: 3px 3px 25px 3px;
+	transition-property: border-radius;
+	transition-duration: 1s;
+}
+
+.red-button:hover {
+	border-radius: 3px;
+}
+
+.hidden {
+	display: none;
+}
+
 /* Nav and footer styling */
 
 nav, footer {
-	background: #151515;
 	margin: 0;
-	padding: 7%;
+	padding: 10%;
 	text-align: right;
 }
 
@@ -52,29 +92,242 @@ footer p {
 }
 
 .link-on-dark {
-	color: #c3c3c3;
-	border: solid #c3c3c3 2px;
-	padding: 5px;
+	color: #ffffff;
+	border: solid #ffffff 2px;
+	padding: 5px 15px;
+	text-decoration: none;
+	font-weight: 200;
+	transition: font-size .5s, border-radius .5s;
+}
+
+.link-on-dark:hover {
+	font-size: 1.25em;
+	border-radius: 3px;
 }
 
 /* Header styling */
 header {
 	color: #ffffff;
-	background: #151515;
 	padding: 5%;
 }
 
-header p, label {
+header p, label, input, a {
 	font-size: 1.2em;
+}
+
+.header-blocks {
+	margin-bottom: 15%;
 }
 
 .quick-links {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.js-quick-link {
+	margin: 10px;
+	width: 125px;
 }
 
 .quick-images {
-    width: 40%;
+    width: inherit;
     border-radius: 100%;
 }
 
+.marvel-search {
+	display: flex;
+	flex-direction: column;
+}
+
+.search-items {
+	margin: 15px 0px;
+	max-width: 325px;
+}
+
+input[type=text] {
+	border: none;
+	height: 40px;
+	padding-left: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.button {
+	display: block;
+	width: 200px;
+	border: none;
+	font-weight: bold;
+	font-size: 1em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#js-error-message {
+	background: #e62429;
+	color: white;
+	padding: 5px;
+}
+
+/* Main Styling */
+
+.red-bar {
+	width: 100%;
+	height: 30px;
+	background: #e62429;
+}
+
+main {
+	padding: 5%;
+	background-image: linear-gradient(
+		white,
+		white,
+		white,
+		white,
+		white,
+		white,
+		#c3c3c3 95%
+	);
+}
+
+.result-blocks {
+	margin-bottom: 15%;
+}
+
+.aliases {
+	columns: 125px auto;
+	background: #c3c3c3;
+}
+
+.aliases li {
+	padding: 10px;
+	font-weight: bold;
+}
+
+#video-results li {
+	margin: 40px 0;
+}
+
+#js-comics li {
+	margin: 40px 0;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.read-link {
+	margin-top: 5%;
+}
+
+.helpful-links li {
+	margin: 20px 0;
+}
+
+/* Responsive styling for larger screens */
+
+@media screen and (min-width: 700px) {
+	header, main {
+		padding: 8.5%;
+	}
+	
+	.js-quick-link {
+		width: 170px;
+	}
+
+	.background img {
+		max-width: 300px;
+	}
+
+	.cover {
+		max-width: 280px;
+		margin: 0;
+	}
+
+	iframe {
+		width: 500px;
+		height: 285px;
+	}
+
+	#js-comics {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+}
+
+@media screen and (min-width: 830px) {
+	nav {
+		padding-bottom: 0;
+	}
+
+	header {
+		padding-top: 0;
+		padding-bottom: 2%;
+	}
+
+	.header-blocks {
+		margin-bottom: 5%;
+	}
+
+	.intro {
+		width: 600px;
+	}
+
+	.search-random {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.search-random > section {
+		width: 40%;
+	}
+
+	.button {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	input[type=text] {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.header-bottom {
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	iframe {
+		width: 280px;
+		height: 158px;
+	}
+
+	.background {
+		width: 50%;
+	}
+
+	.videos {
+		width: 30%;
+	}
+
+	.main-wrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.result-blocks {
+		margin-bottom: 5%;
+	}
+
+	footer {
+		padding: 5%;
+	}
+
+	footer p {
+		color: #c3c3c3;
+		font-size: .8em;
+		margin-top: 2%;
+	}
+}
