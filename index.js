@@ -30,7 +30,7 @@ function displayOrigin(characterInfo) {
     $('.origin').append(`
         <h3>${characterInfo.name}</h3>
         <p>${characterInfo.bio}</p>
-        <img src="${characterInfo.image}" alt="character image">
+        <img src="${characterInfo.image}" alt="character image" role="img">
         <h3>Aliases:</h3>
         <ul class="aliases">
 
@@ -66,7 +66,7 @@ function displayComics(comicJson) {
       $('#js-comics').append(`
       <li>
         <p>${comicJson[i].title}</p>
-        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover" role="img"/></a>
         <a href="${comicJson[i].urls[0].url}" target="_blank" class="red-button read-link">READ NOW</a>
       </li>
     `)
