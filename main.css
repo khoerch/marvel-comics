@@ -54,6 +54,21 @@ button {
 	outline: inherit;
 }
 
+.red-button {
+	background: #e62429;
+	padding: 15px 20px;
+	width: 175px;
+	color: white;
+	text-decoration: none;
+	border-radius: 3px 3px 25px 3px;
+	transition-property: border-radius;
+	transition-duration: 1s;
+}
+
+.red-button:hover {
+	border-radius: 3px;
+}
+
 .hidden {
 	display: none;
 }
@@ -82,6 +97,12 @@ footer p {
 	padding: 5px 15px;
 	text-decoration: none;
 	font-weight: 200;
+	transition: font-size .5s, border-radius .5s;
+}
+
+.link-on-dark:hover {
+	font-size: 1.25em;
+	border-radius: 3px;
 }
 
 /* Header styling */
@@ -134,15 +155,10 @@ input[type=text] {
 
 .button {
 	display: block;
-	background: #e62429;
-	padding: 15px 20px;
 	width: 200px;
-	color: white;
 	border: none;
-	text-decoration: none;
 	font-weight: bold;
 	font-size: 1em;
-	border-radius: 3px 3px 25px 3px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -164,7 +180,6 @@ input[type=text] {
 main {
 	padding: 5%;
 	background-image: linear-gradient(
-		white,
 		white,
 		white,
 		white,
@@ -202,13 +217,7 @@ main {
 }
 
 .read-link {
-	background: #e62429;
-	padding: 15px 20px;
-	width: 175px;
-	color: white;
-	text-decoration: none;
 	margin-top: 5%;
-	border-radius: 3px 3px 25px 3px;
 }
 
 .helpful-links li {
@@ -224,6 +233,10 @@ main {
 	
 	.js-quick-link {
 		width: 170px;
+	}
+
+	.background img {
+		max-width: 300px;
 	}
 
 	.cover {
@@ -282,5 +295,39 @@ main {
 
 	.header-bottom {
 		text-align: center;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	iframe {
+		width: 280px;
+		height: 158px;
+	}
+
+	.background {
+		width: 50%;
+	}
+
+	.videos {
+		width: 30%;
+	}
+
+	.main-wrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.result-blocks {
+		margin-bottom: 5%;
+	}
+
+	footer {
+		padding: 5%;
+	}
+
+	footer p {
+		color: #c3c3c3;
+		font-size: .8em;
+		margin-top: 2%;
 	}
 }
