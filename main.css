@@ -3,6 +3,7 @@
 }
 
 body {
+	background: #151515;
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	color: #151515;
@@ -60,9 +61,8 @@ button {
 /* Nav and footer styling */
 
 nav, footer {
-	background: #151515;
 	margin: 0;
-	padding: 7%;
+	padding: 10%;
 	text-align: right;
 }
 
@@ -87,11 +87,10 @@ footer p {
 /* Header styling */
 header {
 	color: #ffffff;
-	background: #151515;
 	padding: 5%;
 }
 
-header p, label, input {
+header p, label, input, a {
 	font-size: 1.2em;
 }
 
@@ -218,20 +217,70 @@ main {
 
 /* Responsive styling for larger screens */
 
-@media screen and (min-width: 475px) {
-	main {
-		padding: 10%;
+@media screen and (min-width: 700px) {
+	header, main {
+		padding: 8.5%;
 	}
 	
 	.js-quick-link {
-		width: 180px;
+		width: 170px;
 	}
 
-	img {
-		max-width: 385px;
+	.cover {
+		max-width: 280px;
+		margin: 0;
+	}
+
+	iframe {
+		width: 500px;
+		height: 285px;
+	}
+
+	#js-comics {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
 	}
 }
 
 @media screen and (min-width: 830px) {
+	nav {
+		padding-bottom: 0;
+	}
 
+	header {
+		padding-top: 0;
+		padding-bottom: 2%;
+	}
+
+	.header-blocks {
+		margin-bottom: 5%;
+	}
+
+	.intro {
+		width: 600px;
+	}
+
+	.search-random {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.search-random > section {
+		width: 40%;
+	}
+
+	.button {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	input[type=text] {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.header-bottom {
+		text-align: center;
+	}
 }

@@ -66,7 +66,7 @@ function displayComics(comicJson) {
       $('#js-comics').append(`
       <li>
         <p>${comicJson[i].title}</p>
-        <a href="${comicJson[i].urls[0].url}" target="_blank"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover"/></a>
         <a href="${comicJson[i].urls[0].url}" target="_blank" class="read-link">READ NOW</a>
       </li>
     `)
