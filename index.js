@@ -87,9 +87,6 @@ function getOrigin(searchTerm) {
     if (newTerm.slice(0, 7).toLowerCase() !== 'captain') {
         newTerm = searchTerm.replace(/\(([^)]+)\)/, '');
     }
-    
-    console.log('Comicvine Search: ' + newTerm);
-
     const url = "https://comicvine.gamespot.com/api/";
 
     const params = $.param({
@@ -129,7 +126,6 @@ function getOrigin(searchTerm) {
         })
         .catch(err => {
             displayConnectionError();
-            console.log(err.message);
         });
 }
 
@@ -148,15 +144,12 @@ function getVideo(searchTerm) {
         .then(responseJson => displayVideos(responseJson))
         .catch(err => {
             displayConnectionError();
-            console.log(err.message);
         });
 }
 
 function getComics(id) {
     //Takes the unique character ID and returns a selection of comics for readers to start with based on the character
     const urlComics = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?`;
-
-    console.log(id);
 
     const params = $.param({
         format: 'comic',
@@ -178,7 +171,6 @@ function getComics(id) {
       .then(responseJson => displayComics(responseJson.data.results))
       .catch(err => {
         displayConnectionError();
-        console.log(err.message);
     });
 }
 
@@ -197,7 +189,6 @@ function getMarvel(searchTerm) {
         })
         .catch(err => {
             displayConnectionError();
-            console.log(err.message);
         });
 }
 
@@ -206,10 +197,8 @@ function validateSearch(formInput) {
     const searchTerm = formInput.toLowerCase();
     if (!characters.includes(searchTerm)) {
         const searchError = new Error('Character not found');
-        console.log(searchError.message);
         displayError(searchTerm);
     } else {
-        console.log('Character found');
         getOrigin(searchTerm);
         getVideo(searchTerm);
         getMarvel(searchTerm);
@@ -223,7 +212,6 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const formInput = $('#js-character-search').val();
-        console.log('User input: ' + formInput);
         validateSearch(formInput);
     })
 }
@@ -231,10 +219,7 @@ function watchForm() {
 function randomClick() {
     // Watches for a user to click on the random character button and returns a random item from the characters array
     $('.js-random').click(event => {
-        console.log('Random click');
         const randNum = Math.floor(Math.random() * 1491);
-        console.log('Random character: ' + characters[randNum]);
-
         getOrigin(characters[randNum]);
         getVideo(characters[randNum]);
         getMarvel(characters[randNum]);
@@ -245,8 +230,6 @@ function quickLink() {
     // Makes appropriate API calls and DOM manipulation if users click on one of the quick links at the top
     $('.js-quick-link').click(function() {
         let linkVal = $(this).val();
-        console.log('Quick Link: ' + linkVal);
-
         getOrigin(linkVal);
         getVideo(linkVal);
         getMarvel(linkVal);
