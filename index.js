@@ -18,9 +18,15 @@ const apiKeyComicVine = 'db461332518168bcf3a79484a73ad6fb11f7dc5b';
 
 function displayError(searchTerm) {
     // This function tells the user that their search term is invalid and encourages them to try again
-    $('#js-error-message').empty().removeClass('hidden').append(`
-        Whoops! The character, ${searchTerm} could not be found. Remember to use the characters from the drop-down, or to include hyphens and other characters where appropriate. 
-    `);
+    if (searchTerm.length == 0) {
+        $('#js-error-message').empty().removeClass('hidden').append(`
+        Whoops! Remember to enter a character in the search bar! 
+        `);
+    } else{
+        $('#js-error-message').empty().removeClass('hidden').append(`
+        Whoops! The character, ${searchTerm}, could not be found. Remember to use the characters from the drop-down, or to include hyphens and other characters where appropriate. 
+        `);
+    }
 }
 
 function displayConnectionError() {
