@@ -23,6 +23,13 @@ function displayError(searchTerm) {
     `);
 }
 
+function displayConnectionError() {
+    // In the event of a catch statement, this will notify the user that there may be an issue with their internet connection
+    $('#js-error-message').empty().removeClass('hidden').append(`
+        Whoops! Please check your internet connection and try again. 
+    `);
+}
+
 function displayOrigin(characterInfo) {
     //Display the origin for the searched character from Comic Vine's API
     $('#js-error-message').empty().addClass('hidden');
@@ -66,7 +73,7 @@ function displayComics(comicJson) {
       $('#js-comics').append(`
       <li>
         <p>${comicJson[i].title}</p>
-        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="Issue cover" role="img"/></a>
+        <a href="${comicJson[i].urls[0].url}" target="_blank" class="cover"><img src="https${comicJson[i].images[0].path.slice(4)}.${comicJson[i].images[0].extension}" alt="${comicJson[i].title} cover" role="img"/></a>
         <a href="${comicJson[i].urls[0].url}" target="_blank" class="red-button read-link">READ NOW</a>
       </li>
     `)
@@ -120,7 +127,10 @@ function getOrigin(searchTerm) {
 
             displayOrigin(characterInfo);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => {
+            displayConnectionError();
+            console.log(err.message);
+        });
 }
 
 function getVideo(searchTerm) {
@@ -136,7 +146,10 @@ function getVideo(searchTerm) {
             throw new Error(response.statusText);
         })
         .then(responseJson => displayVideos(responseJson))
-        .catch(err => console.log(err.message));
+        .catch(err => {
+            displayConnectionError();
+            console.log(err.message);
+        });
 }
 
 function getComics(id) {
@@ -163,7 +176,10 @@ function getComics(id) {
         } throw new Error(response.statusText);
       })
       .then(responseJson => displayComics(responseJson.data.results))
-      .catch(err => console.log(err.message));
+      .catch(err => {
+        displayConnectionError();
+        console.log(err.message);
+    });
 }
 
 function getMarvel(searchTerm) {
@@ -179,7 +195,10 @@ function getMarvel(searchTerm) {
         .then(responseJson => {
             getComics(responseJson.data.results[0].id);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => {
+            displayConnectionError();
+            console.log(err.message);
+        });
 }
 
 function validateSearch(formInput) {
@@ -242,7 +261,18 @@ function scrollTo() {
     })
 }
 
+function topAndBottomLinks() {
+    // Links at the top and bottom of the page to scroll up and down
+    $('.link-on-dark').click(function(event) {
+        let jump = $(this).attr('href');
+        const position = $(jump).offset();
+        $('html, body').stop().animate({ scrollTop: position.top }, 500);
+        event.preventDefault();
+    })
+}
+
 $(quickLink);
 $(randomClick);
 $(watchForm);
 $(scrollTo);
+$(topAndBottomLinks);
